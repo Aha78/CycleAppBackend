@@ -20,19 +20,8 @@ using Org.BouncyCastle.Ocsp;
 namespace FunctionApp3
 {
 
-    class Station
-    {
-        public string Name { get; set; }
-    }
 
-    class ListStationsBLA
-    {
-        public string ListStations()
-        {
-            StationsDAO StationsDAO = new StationsDAO();
-            return JsonConvert.SerializeObject(StationsDAO.ListStations());
-        }
-    }
+
 
 
 
@@ -48,7 +37,7 @@ namespace FunctionApp3
 
             var answer = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(listStations.ListStations(), Encoding.UTF8, "application/json")
+                Content = new StringContent(listStations.ListStations(Int16.Parse(req.Query["page"])), Encoding.UTF8, "application/json")
             };
             answer.Headers.Add("Access-Control-Allow-Origin", "*");
             return answer;

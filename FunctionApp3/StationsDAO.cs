@@ -3,13 +3,19 @@ using MySqlConnector;
 
 namespace FunctionApp3
 {
+
+    class Station
+    {
+        public string Name { get; set; }
+    }
+
     class StationsDAO
     {
-        public List<Station> ListStations()
+        public List<Station> ListStations(int page)
         {
-            using var connection = new MySqlConnection("Server=localhost;User ID=root;Password=123456;Database=databasename");
-            connection.Open();
-            string sql = "select * from databasename.Stations1;'";
+            using MySqlConnection connection = openConnection();
+
+            string sql = "select * from databasename.Stations1 LIMIT 10 OFFSET  " + (page *10) + ";";
             MySqlCommand cmd = new MySqlCommand(sql, connection);
             MySqlDataReader rdr = cmd.ExecuteReader();
             List<Station> list = new List<Station>();
@@ -22,6 +28,13 @@ namespace FunctionApp3
             }
             return list;
 
+        }
+
+        private static MySqlConnection openConnection()
+        {
+            var connection = new MySqlConnection("Server=localhost;User ID=root;Password=123456;Database=databasename");
+            connection.Open();
+            return connection;
         }
     }
 }
