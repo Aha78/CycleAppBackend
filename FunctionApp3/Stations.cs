@@ -12,17 +12,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using MySqlConnector;
+
 using System.Net.Http;
 using System.Net;
+using Org.BouncyCastle.Ocsp;
 
 namespace FunctionApp3
 {
 
     class Station
     {
-        public string Name { get; set; }   
+        public string Name { get; set; }
     }
+
+    class ListStationsBLA
+    {
+        public string ListStations()
+        {
+            StationsDAO StationsDAO = new StationsDAO();
+            return JsonConvert.SerializeObject(StationsDAO.ListStations());
+        }
+    }
+
+
 
     public static class Function2
     {
@@ -32,29 +44,15 @@ namespace FunctionApp3
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
-            log.LogInformation("C# HTTP trigger function processed a request.");
-            string name = req.Query["name"];
-            using var connection = new MySqlConnection("Server=localhost;User ID=root;Password=123456;Database=databasename");
-            connection.Open();
-            string sql = "select * from databasename.Stations1;'";
-            MySqlCommand cmd = new MySqlCommand(sql, connection);
-            MySqlDataReader rdr = cmd.ExecuteReader();
-            List <Station> list = new List<Station>();
-
-            while (rdr.Read())
-            {
-                Station station = new Station();
-                station.Name = (string)rdr[2];
-                list.Add(station);
-            }
+            ListStationsBLA listStations = new ListStationsBLA();
 
             var answer = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(JsonConvert.SerializeObject(list), Encoding.UTF8, "application/json")
+                Content = new StringContent(listStations.ListStations(), Encoding.UTF8, "application/json")
             };
             answer.Headers.Add("Access-Control-Allow-Origin", "*");
             return answer;
 
+        }
     }
-}
 }
