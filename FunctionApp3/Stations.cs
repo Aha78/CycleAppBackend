@@ -27,14 +27,30 @@ namespace FunctionApp3
 
     public static class Function2
     {
-        [FunctionName("Stations")]
-        public static async Task<HttpResponseMessage> Run(
+        [FunctionName("stationdetails")]
+        public static async Task<HttpResponseMessage> run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
-            ListStationsBLA listStations = new ListStationsBLA();
+            ListStationsBLA stationDetails = new ListStationsBLA();
+         
+            var answer = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(stationDetails.getStationDetails(req.Query["id"]), Encoding.UTF8, "application/json")
+            };
+            answer.Headers.Add("Access-Control-Allow-Origin", "*");
+            return answer;
 
+        }
+
+        [FunctionName("stations")]
+        public static async Task<HttpResponseMessage> runDetails(
+    [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
+    ILogger log)
+        {
+            log.LogInformation("C# HTTP trigger function processed a request.");
+            ListStationsBLA listStations = new ListStationsBLA();
             var answer = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(listStations.ListStations(Int16.Parse(req.Query["page"])), Encoding.UTF8, "application/json")

@@ -11,8 +11,28 @@ namespace FunctionApp3
 
     class StationsDAO
     {
+
+        public Station getStationDetails(string id)
+        {
+    
+            using MySqlConnection connection = openConnection();
+            string sql = "select * from Stations1 where Stations1.Id = \"" + id +  "\"";
+            MySqlCommand cmd = new MySqlCommand(sql, connection);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            List<Station> list = new List<Station>();
+
+
+            rdr.Read();
+            Station station = new Station();
+            station.Name = (string)rdr[2];
+            return station;
+               
+            
+        }
         public List<Station> ListStations(int page)
         {
+
+
             using MySqlConnection connection = openConnection();
 
             string sql = "select * from databasename.Stations1 LIMIT 10 OFFSET  " + (page *10) + ";";
