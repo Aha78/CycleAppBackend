@@ -7,6 +7,7 @@ namespace FunctionApp3
     struct Station
     {
         public string Name { get; set; }
+        public string Address { get; set; }
         public double Lat { get; set; }
         public double Lon { get; set; }
     }
@@ -22,13 +23,14 @@ namespace FunctionApp3
             MySqlCommand cmd = new MySqlCommand(sql, connection);
             MySqlDataReader rdr = cmd.ExecuteReader();
             List<Station> list = new List<Station>();
-
-
             rdr.Read();
-            Station station = new Station();
-            station.Name = (string)rdr[2];
-            station.Lat= (double)rdr[11];
-            station.Lon = (double)rdr[12];
+            Station station = new Station
+            {
+                Name = (string)rdr[2],
+                Address= (string)rdr[5],
+                Lat = (double)rdr[11],
+                Lon = (double)rdr[12]
+            };
             return station;
                
             
@@ -36,9 +38,7 @@ namespace FunctionApp3
         public List<Station> ListStations(int page)
         {
 
-
             using MySqlConnection connection = openConnection();
-
             string sql = "select * from databasename.Stations1 LIMIT 10 OFFSET  " + (page *10) + ";";
             MySqlCommand cmd = new MySqlCommand(sql, connection);
             MySqlDataReader rdr = cmd.ExecuteReader();
