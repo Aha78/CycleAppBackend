@@ -4,9 +4,11 @@ using MySqlConnector;
 namespace FunctionApp3
 {
 
-    class Station
+    struct Station
     {
         public string Name { get; set; }
+        public double Lat { get; set; }
+        public double Lon { get; set; }
     }
 
     class StationsDAO
@@ -25,6 +27,8 @@ namespace FunctionApp3
             rdr.Read();
             Station station = new Station();
             station.Name = (string)rdr[2];
+            station.Lat= (double)rdr[11];
+            station.Lon = (double)rdr[12];
             return station;
                
             
