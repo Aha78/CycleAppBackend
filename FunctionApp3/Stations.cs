@@ -50,7 +50,7 @@ namespace FunctionApp3
     ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
-            ListStationsBLA listStations = new ListStationsBLA();
+            ListStationsBLA listStations = new ();
             var answer = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(listStations.ListStations(Int16.Parse(req.Query["page"])), Encoding.UTF8, "application/json")
