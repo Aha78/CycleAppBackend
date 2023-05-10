@@ -10,6 +10,8 @@ namespace FunctionApp3
         public string Address { get; set; }
         public double Lat { get; set; }
         public double Lon { get; set; }
+        public   int NumDeb { get; set; }
+        public int NumEnd { get; set; }
     }
 
     class StationsDAO
@@ -17,30 +19,37 @@ namespace FunctionApp3
 
         public Station getStationDetails(string id)
         {
-    
-            using MySqlConnection connection = openConnection();
-            string sql = "select * from Stations1 where Stations1.Id = \"" + id +  "\"";
-            MySqlCommand cmd = new MySqlCommand(sql, connection);
+            JourneysDao journeysDao = new ();
+            int totalDeb = journeysDao.getNumberstartingJourneys(id);
+            int totalEnd = journeysDao.getNumberendingJourneys(id);
+            Connection conn = new ();
+            MySqlConnection connection=conn.getConnection ();
+            string sql = "select * from Stations1 where Stations1.Id = \"" + id + "\"";
+            MySqlCommand cmd = new (sql, connection);
             MySqlDataReader rdr = cmd.ExecuteReader();
-            List<Station> list = new List<Station>();
             rdr.Read();
-            Station station = new Station
+
+            Station station = new ()
             {
                 Name = (string)rdr[2],
-                Address= (string)rdr[5],
+                Address = (string)rdr[5],
                 Lat = (double)rdr[11],
-                Lon = (double)rdr[12]
+                Lon = (double)rdr[12],
+                NumDeb = totalDeb,
+                NumEnd = totalEnd  
             };
+            connection.Close ();
             return station;
-               
-            
+
+
         }
         public List<Station> ListStations(int page)
         {
             Connection conn = new Connection();
 
             using MySqlConnection connection = conn.getConnection();
-            string sql = "select * from databasename.Stations1 LIMIT 10 OFFSET  " + (page *10) + ";";
+
+            string sql = "select * from databasename.Stations1 LIMIT 10 OFFSET  " + (page * 10) + ";";
             MySqlCommand cmd = new MySqlCommand(sql, connection);
             MySqlDataReader rdr = cmd.ExecuteReader();
             List<Station> list = new List<Station>();
@@ -53,13 +62,6 @@ namespace FunctionApp3
             }
             return list;
 
-        }
-
-        private static MySqlConnection openConnection()
-        {
-            var connection = new MySqlConnection("Server=localhost;User ID=root;Password=123456;Database=databasename");
-            connection.Open();
-            return connection;
         }
     }
 }
