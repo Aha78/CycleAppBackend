@@ -37,8 +37,9 @@ namespace FunctionApp3
         }
         public List<Station> ListStations(int page)
         {
+            Connection conn = new Connection();
 
-            using MySqlConnection connection = openConnection();
+            using MySqlConnection connection = conn.getConnection();
             string sql = "select * from databasename.Stations1 LIMIT 10 OFFSET  " + (page *10) + ";";
             MySqlCommand cmd = new MySqlCommand(sql, connection);
             MySqlDataReader rdr = cmd.ExecuteReader();
