@@ -6,6 +6,7 @@ namespace FunctionApp3
 
     struct Station
     {
+        public string id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public double Lat { get; set; }
@@ -29,8 +30,9 @@ namespace FunctionApp3
             MySqlDataReader rdr = cmd.ExecuteReader();
             rdr.Read();
 
-            Station station = new ()
+            Station station = new()
             {
+                
                 Name = (string)rdr[2],
                 Address = (string)rdr[5],
                 Lat = (double)rdr[11],
@@ -56,8 +58,11 @@ namespace FunctionApp3
 
             while (rdr.Read())
             {
-                Station station = new Station();
-                station.Name = (string)rdr[2];
+                Station station = new Station
+                {
+                    id = (string)rdr[1],
+                    Name = (string)rdr[2]
+                };
                 list.Add(station);
             }
             return list;
