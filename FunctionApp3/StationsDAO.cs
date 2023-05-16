@@ -35,8 +35,8 @@ namespace FunctionApp3
                 
                 Name = (string)rdr[2],
                 Address = (string)rdr[5],
-                Lat = (double)rdr[11],
-                Lon = (double)rdr[12],
+                Lat = (double)rdr[12],
+                Lon = (double)rdr[11],
                 NumDeb = totalDeb,
                 NumEnd = totalEnd  
             };
