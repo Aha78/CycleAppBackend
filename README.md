@@ -5,7 +5,7 @@ Kaupunkipyörä App
 Tehty:
 Asemian ja matkojen sivutus
 matkoissa tyydytty yli 20000 ms matkoihin, muussa tapaksessa tietojen siirrossa palvelimelle olisi tullut ongelma, tietokantapalvelimeni 
-on rajoitettu 6y mt: n tiedonsiirtoon ja siirrettävää olisi ollut kerralla yli 90 mt.
+on rajoitettu 64 mt: n tiedonsiirtoon ja siirrettävää olisi ollut kerralla yli 90 mt.
 
 Asemien tiedot-välilehti
 
