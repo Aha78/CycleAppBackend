@@ -7,7 +7,7 @@ namespace FunctionApp3
     {
         public MySqlConnection getConnection()
         {
-            var connection = new MySqlConnection("Server=localhost;User ID=root;Password=123456;Database=databasename");
+            var connection = new MySqlConnection("Server=IP;User ID=USER;PASSWORD;Database=anttohautamakinet");
             connection.Open();
             return connection;
 

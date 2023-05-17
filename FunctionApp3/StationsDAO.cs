@@ -25,7 +25,7 @@ namespace FunctionApp3
             int totalEnd = journeysDao.getNumberendingJourneys(id);
             Connection conn = new ();
             MySqlConnection connection=conn.getConnection ();
-            string sql = "select * from Stations1 where Stations1.Id = \"" + id + "\"";
+            string sql = "select * from stations1 where stations1.ID = \"" + id + "\"";
             MySqlCommand cmd = new (sql, connection);
             MySqlDataReader rdr = cmd.ExecuteReader();
             rdr.Read();
@@ -37,8 +37,8 @@ namespace FunctionApp3
                 Address = (string)rdr[5],
                 Lat = (double)rdr[12],
                 Lon = (double)rdr[11],
-                NumDeb = totalDeb,
-                NumEnd = totalEnd  
+                NumDeb = 0,
+                NumEnd = 0  
             };
             connection.Close ();
             return station;
@@ -51,7 +51,7 @@ namespace FunctionApp3
 
             using MySqlConnection connection = conn.getConnection();
 
-            string sql = "select * from databasename.Stations1 LIMIT 10 OFFSET  " + (page * 10) + ";";
+            string sql = "select * from stations1 LIMIT 10 OFFSET  " + (page * 10) + ";";
             MySqlCommand cmd = new MySqlCommand(sql, connection);
             MySqlDataReader rdr = cmd.ExecuteReader();
             List<Station> list = new List<Station>();

@@ -17,7 +17,7 @@ namespace FunctionApp3
         public int getNumberstartingJourneys(string stationID)
         {
             Connection conn = new();
-            string sql = "select count(*) from databasename.journeys where databasename.journeys.Departure_station_id='" + stationID + "';";
+            string sql = "select count(*) from journeys where journeys.Departure_station_id='" + stationID + "';";
             MySqlConnection connection = conn.getConnection();
             MySqlCommand cmd = new(sql, connection);
             MySqlDataReader rdr = cmd.ExecuteReader();
@@ -28,7 +28,7 @@ namespace FunctionApp3
         public int getNumberendingJourneys(string stationID)
         {
             Connection conn = new();
-            string sql = "select count(*) from databasename.journeys where databasename.journeys.Return_station_id='" + stationID + "';";
+            string sql = "select count(*) from journeys where journeys.Return_station_id='" + stationID + "';";
             MySqlConnection connection = conn.getConnection();
             MySqlCommand cmd = new(sql, connection);
             MySqlDataReader rdr = cmd.ExecuteReader();
@@ -39,8 +39,7 @@ namespace FunctionApp3
         {
       
             Connection conn=new();
-
-            string sql = "select * from databasename.journeys LIMIT 10 OFFSET  " + (Int16.Parse(page) * 10) + ";";
+            string sql = "select * from journeys LIMIT 10 OFFSET  " + (Int16.Parse(page) * 10) + ";";
             MySqlConnection connection = conn.getConnection();
             MySqlCommand cmd = new(sql, connection);
             MySqlDataReader rdr = cmd.ExecuteReader();

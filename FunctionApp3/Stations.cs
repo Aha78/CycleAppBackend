@@ -29,7 +29,7 @@ namespace FunctionApp3
     {
         [FunctionName("stationdetails")]
         public static async Task<HttpResponseMessage> run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
@@ -46,7 +46,7 @@ namespace FunctionApp3
 
         [FunctionName("stations")]
         public static async Task<HttpResponseMessage> runDetails(
-    [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
+    [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
     ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");

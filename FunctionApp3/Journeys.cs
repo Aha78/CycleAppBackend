@@ -14,7 +14,7 @@ namespace FunctionApp3
   
             [FunctionName("Journeys")]
             public static async Task<HttpResponseMessage> run(
-                [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
+                [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
                 ILogger log)
             {
 
