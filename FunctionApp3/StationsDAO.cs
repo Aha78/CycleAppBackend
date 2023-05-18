@@ -37,8 +37,8 @@ namespace FunctionApp3
                 Address = (string)rdr[5],
                 Lat = (double)rdr[12],
                 Lon = (double)rdr[11],
-                NumDeb = 0,
-                NumEnd = 0  
+                NumDeb = totalDeb,
+                NumEnd = totalEnd
             };
             connection.Close ();
             return station;

@@ -17,12 +17,12 @@ namespace FunctionApp3
         public int getNumberstartingJourneys(string stationID)
         {
             Connection conn = new();
-            string sql = "select count(*) from journeys where journeys.Departure_station_id='" + stationID + "';";
+            string sql = "select count(*) from journeys where journeys.Departure_station_id = '" + stationID + "'; ";
             MySqlConnection connection = conn.getConnection();
             MySqlCommand cmd = new(sql, connection);
             MySqlDataReader rdr = cmd.ExecuteReader();
             rdr.Read();
-            return Int32.Parse("" +rdr[0]);
+            return Int32.Parse("" + rdr[0]);
         }
 
         public int getNumberendingJourneys(string stationID)
@@ -53,7 +53,7 @@ namespace FunctionApp3
                     end =rdr[5].ToString(),
                     distance = rdr[6].ToString().Trim(),
                     //to escape  necessary chars
-                    duration = rdr[7].ToString().Trim()
+                    duration = (string)rdr[7]
                 };
                 journeys.Add(journey);
             }
