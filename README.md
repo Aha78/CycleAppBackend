@@ -20,6 +20,4 @@ sen http-kutsumuotoon.
 Endpoint:t muodostetaan kahdessa tiedostossa: stations.cs ja journeys.cs.
 
 
-Testejä en ole tehnyt
-
 Antto Hautamäki
