@@ -1,4 +1,10 @@
-# CycleAppBackend
+
+
+Linkit frontend:n ja backend:n 
+
+https://github.com/Aha78/testsforCycleApp
+
+https://github.com/Aha78/CycleAppBackend
 
 Kaupunkipyörä App
 
@@ -18,6 +24,8 @@ sen http-kutsumuotoon.
 
 
 Endpoint:t muodostetaan kahdessa tiedostossa: stations.cs ja journeys.cs.
+
+
 
 
 Antto Hautamäki
