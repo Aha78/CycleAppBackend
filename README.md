@@ -24,6 +24,7 @@ sen http-kutsumuotoon.
 
 
 Endpoint:t muodostetaan kahdessa tiedostossa: stations.cs ja journeys.cs.
+Huom! käyttöliittymän linkit pitää konfiguroida uudelleen, koska azure-ympäristöä ei minulla enää ole käytössä-
 
 
 
